@@ -1,0 +1,35 @@
+{{page-title "LAN"}}
+
+<h2>LAN</h2>
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Interfaces</a>
+  </li>
+  <li class="nav-item">
+    <LinkTo class="nav-link" @route="authenticated.dhcpv4">DHCPv4</LinkTo>
+  </li>
+</ul>
+
+{{#if this.interfaces.length}}
+  <div class="interface-selector mb-4">
+    <label class="interface-selector-label">Select Interface:</label>
+    <div class="interface-tabs">
+      {{#each this.interfaces as |iface|}}
+        <button 
+          type="button" 
+          class="interface-tab {{if (eq iface.Alias this.selectedInterface.Alias) 'active'}}"
+          {{on "click" (fn this.selectInterface iface.Alias)}}
+        >
+          <StatusIndicator @status={{iface.Status}} @statusKey="Up"/>
+          {{iface.Alias}}
+        </button>
+      {{/each}}
+    </div>
+  </div>
+
+  {{#if this.selectedInterface}}
+    <NetworkInterface @interface={{this.selectedInterface}} />
+  {{/if}}
+{{else}}
+  <div class="alert alert-info">No interfaces available.</div>
+{{/if}}

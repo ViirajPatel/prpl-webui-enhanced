@@ -1,0 +1,22 @@
+<div class="card dashboard-card">
+  <div class="card-body">
+    <div class="row align-items-center">
+      <div class="col-7">
+        <h5 class="card-title">CPU</h5>
+        <div class="mb-1">
+          <small class="text-muted">Usage:</small>
+          <strong class="ms-1">{{@status.CPUUsage}}%</strong>
+        </div>
+        <div>
+          <small class="text-muted">Processes:</small>
+          <strong class="ms-1">{{@status.ProcessNumberOfEntries}}</strong>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="chart-container">
+          <Chart::LinearChart @data={{@cpuData}} @numOfValues="15" @key="usage" @maxValue="100" @color="#782572" @height="60" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

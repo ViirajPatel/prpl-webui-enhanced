@@ -1,0 +1,5 @@
+<select ...attributes disabled="{{this.disabled}}" {{on "change" this.update}} >
+{{#each selOptions as |opt|}}
+  <option value="{{opt.key}}" selected={{is-equal opt.key this.args.value}}>{{opt.label}}</option>
+{{/each}}
+</select>

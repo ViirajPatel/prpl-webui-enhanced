@@ -1,0 +1,22 @@
+<div class="card mb-3">
+  <div class="card-header">
+   <StatusIndicator @status={{@accesspoint.Status}} @statusKey="Enabled"/> {{@accesspoint.Alias}}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+
+        <div class="row mb-2">
+          <div class="col-md-3"></div>
+          <div class="col-md-9">
+            <Input @type="checkbox" @value="{{@accesspoint.Enable}}" @checked={{this.enabled}} class="form-check-input" />
+            <label class="form-check-label">Enable</label>
+          </div>
+        </div>
+
+        <Wifi::Accesspoint::Security @security={{@accesspoint.Security}} />
+
+      </div>
+    </div>
+  </div >
+</div>

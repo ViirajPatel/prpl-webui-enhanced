@@ -1,0 +1,16 @@
+{{page-title "Lcm"}}
+<h2>LCM</h2>
+<div class="row">
+  <div class="col-md-3 mb-4">
+    Execution Environments: {{@model.ExecEnvNumberOfEntries}}<br />
+    Execution Units: {{@model.ExecutionUnitNumberOfEntries}}<br />
+    Deployment Units: {{@model.DeploymentUnitNumberOfEntries}}
+  </div>
+</div>
+<div class="row">
+  {{#each @model.DeploymentUnit as |deploymentUnit index|}}
+    <div class="col-md-6">
+      <Lcm::DeploymentUnit @unit={{deploymentUnit}} />
+    </div>
+  {{/each}}
+</div>

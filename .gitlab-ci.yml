@@ -1,0 +1,60 @@
+variables:
+  CI_PACKAGE_REGISTRY_URL: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/prpl-webui"
+
+stages:
+  - build
+  - upload
+  - release
+
+build:
+  stage: build
+  image: node:18-alpine
+  script:
+    - npm install
+    - npm install ember-cli
+    - npm run build
+    - tar cvzf "prpl-webui-${CI_COMMIT_SHORT_SHA}.tar.gz" dist
+
+  artifacts:
+    name: "prpl-webui-$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA"
+    expire_in: 1 week
+    when: on_success
+    paths:
+      - dist
+      - prpl-webui-*
+
+  cache:
+    paths:
+      - node_modules/
+
+release upload:
+  stage: upload
+  image: curlimages/curl
+  needs:
+    - job: build
+      artifacts: true
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /\A\d+\.\d+\.\d+\z/'
+  script:
+    - |
+      curl \
+      --header "JOB-TOKEN: $CI_JOB_TOKEN" \
+      --upload-file prpl-webui-${CI_COMMIT_SHORT_SHA}.tar.gz \
+      "${CI_PACKAGE_REGISTRY_URL}/${CI_COMMIT_TAG}/prpl-webui-${CI_COMMIT_TAG}.tar.gz"
+
+release create:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /\A\d+\.\d+\.\d+\z/'
+  script:
+    - echo "Creating prpl-webui release version $CI_COMMIT_TAG"
+  release:
+    name: 'Release version $CI_COMMIT_TAG'
+    description: 'prpl-webui release version $CI_COMMIT_TAG'
+    tag_name: '$CI_COMMIT_TAG'
+    ref: '$CI_COMMIT_SHA'
+    assets:
+      links:
+        - name: 'prpl-webui-${CI_COMMIT_TAG}.tar.gz'
+          url: '${CI_PACKAGE_REGISTRY_URL}/${CI_COMMIT_TAG}/prpl-webui-${CI_COMMIT_TAG}.tar.gz'

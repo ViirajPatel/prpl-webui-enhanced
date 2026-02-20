@@ -1,0 +1,64 @@
+<div class="card mb-3">
+  <div class="card-header">
+   {{@radio.OperatingFrequencyBand}} - {{@radio.Name}}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+
+        <div class="row mb-2">
+          <div class="col-md-3"></div>
+          <div class="col-md-9">
+            <Input @type="checkbox" @value="{{@radio.Enable}}" @checked={{this.enabled}} class="form-check-input" />
+            <label class="form-check-label">Enable</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-3">
+            <label class="col-form-label">Channel</label>
+          </div>
+          <div class="col-md-3">
+            <Helper::Select class="form-select" @options={{this.channels}} @value={{@radio.Channel}} @optValue="key" @optLabel="label" @onChange={{this.setChannel}} @disabled={{autoChannelEnabled}} />
+          </div>
+          <div class="col-md-6">
+            <div class="form-check">
+              <Input @type="checkbox" @value="{{@radio.AutoChannelEnable}}" @checked={{this.autoChannelEnabled}} class="form-check-input" />
+              <label class="form-check-label">Auto</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-3">Channel BW</div>
+          <div class="col-md-9">
+            {{@radio.CurrentOperatingChannelBandwidth}}
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-6">
+
+        <div class="row mb-2">
+          <div class="col-md-12">&nbsp;</div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-3">
+            <label class="col-form-label">Base MAC</label>
+          </div>
+          <div class="col-md-9">
+            <label class="col-form-label">{{@radio.BaseMACAddress}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-3">Reg. Domain</div>
+          <div class="col-md-9">{{@radio.RegulatoryDomain}}</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

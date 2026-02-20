@@ -1,0 +1,41 @@
+{{page-title "Dashboard"}}
+<h2>Dashboard</h2>
+<div class="row row-eq-height">
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <Dashboard::SystemStatus @device={{@model.deviceInfo}} />
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <Dashboard::ProcessStatus @status={{@model.deviceInfo.ProcessStatus}} @cpuData={{this.CPUdata}} />
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <Dashboard::MemoryStatus @status={{@model.deviceInfo.MemoryStatus}} />
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <Dashboard::Wan @wan={{@model.wan}} @statisticData={{this.WANStatistics}} />
+   </div>
+</div>
+
+{{#if @model.wifi.SSID.length}}
+<div class="interface-selector mt-4 mb-3">
+  <label class="interface-selector-label">WiFi Statistics</label>
+  <div class="interface-tabs">
+    {{#each @model.wifi.SSID as |ssid index|}}
+      <button 
+        type="button" 
+        class="interface-tab {{if (eq index this.selectedWifiIndex) 'active'}}"
+        {{on "click" (fn this.selectWifi index)}}
+      >
+        {{ssid.Alias}}
+      </button>
+    {{/each}}
+  </div>
+</div>
+
+{{#if this.selectedWifiSsid}}
+  <div class="row">
+    <div class="col-lg-6">
+      <Dashboard::WifiSsid @ssid={{this.selectedWifiSsid}} @packetData={{this.WiFiSSIDStatistics}} />
+    </div>
+  </div>
+{{/if}}
+{{/if}}

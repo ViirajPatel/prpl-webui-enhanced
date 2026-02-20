@@ -1,0 +1,27 @@
+<div class="form-row">
+  <label class="form-row-label">Enable</label>
+  <div class="form-row-input">
+    <div class="form-check">
+      <Input @type="checkbox" @value="{{@address.Enable}}" @checked={{this.enabled}} class="form-check-input" id="enable-{{@address.Alias}}" />
+      <label class="form-check-label" for="enable-{{@address.Alias}}">{{@address.Alias}}</label>
+    </div>
+  </div>
+</div>
+<div class="form-row">
+  <label class="form-row-label">Addressing Type</label>
+  <div class="form-row-input">
+    <Helper::Select class="form-select form-select-sm" @options={{this.options}} @value={{@address.AddressingType}} @optValue="key" @optLabel="label" @onChange={{this.setAddressingType}} @disabled={{this.disabled}} />
+  </div>
+</div>
+<div class="form-row">
+  <label class="form-row-label">IPv4 Address</label>
+  <div class="form-row-input">
+    <Input class="form-control form-control-sm" type="text" @value={{@address.IPAddress}} disabled={{this.disabled}} />
+  </div>
+</div>
+<div class="form-row">
+  <label class="form-row-label">IPv4 Netmask</label>
+  <div class="form-row-input">
+    <Input class="form-control form-control-sm" type="text" @value={{@address.SubnetMask}} disabled={{this.disabled}} />
+  </div>
+</div>

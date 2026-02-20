@@ -1,0 +1,42 @@
+<div class="config-controls mb-4">
+  <div class="form-row">
+    <label class="form-row-label">Operation Mode</label>
+    <div class="form-row-input" style="max-width: 280px;">
+      <Helper::Select class="form-select form-select-sm" @options={{this.opModeOptions}} @value={{@model.OperationMode}} @optValue="key" @optLabel="label" @onChange={{this.setOperationMode}} />
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="form-row-label">WAN Mode</label>
+    <div class="form-row-input" style="max-width: 280px;">
+      <Helper::Select class="form-select form-select-sm" @options={{this.wanModeOptions}} @value={{@model.WANMode}} @optValue="key" @optLabel="label" @onChange={{this.setWanMode}} @disabled={{this.isAutomatic}} />
+    </div>
+  </div>
+</div>
+
+{{#if this.wans.length}}
+  <div class="interface-selector mb-4">
+    <label class="interface-selector-label">Select WAN Configuration:</label>
+    <div class="interface-tabs">
+      {{#each this.wans as |wan|}}
+        <button 
+          type="button" 
+          class="interface-tab {{if (eq wan.Alias this.selectedWan.Alias) 'active'}}"
+          {{on "click" (fn this.selectWan wan.Alias)}}
+        >
+          <StatusIndicator @status={{wan.Status}} @statusKey="Enabled"/>
+          {{wan.Alias}}
+        </button>
+      {{/each}}
+    </div>
+  </div>
+
+  {{#if this.selectedWan}}
+    <Wan::WanmanagerWan @wan={{this.selectedWan}} />
+  {{/if}}
+{{else}}
+  <div class="alert alert-info">No WAN configurations available.</div>
+{{/if}}
+
+<div class="mt-4">
+  <button type="button" class="btn btn-primary" {{on "click" this.updateWanManager}} disabled={{unless this.hasChanges "disabled"}}>Update</button>
+</div>

@@ -1,0 +1,585 @@
+@import "ember-bootstrap/bootstrap";
+
+/* color defintions */
+$prpl-dark: #782572;
+$prpl-medium: #f0d0ee;
+$prpl-lighter: #fff4fe;
+$prpl-light: #f8e8f7;
+$border-radius: 0.5rem;
+$card-shadow: 0 2px 8px rgba(120, 37, 114, 0.08);
+
+html {
+  font-size: 0.9em;
+}
+
+body {
+  background-color: $prpl-lighter;
+}
+
+h2 {
+  font-size: 1.5em;
+  padding-top: 0.45em;
+  margin-bottom: 1em;
+  color: $prpl-dark;
+  font-weight: 600;
+}
+
+a {
+  color: $prpl-dark;
+}
+
+/* ===== CARD STYLES ===== */
+.card {
+  border: 1px solid rgba(120, 37, 114, 0.12);
+  border-radius: $border-radius;
+  box-shadow: $card-shadow;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  background: #fff;
+  height: 100%;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(120, 37, 114, 0.15);
+}
+
+.card-header {
+  background: linear-gradient(135deg, $prpl-light 0%, #fff 100%);
+  border-bottom: 1px solid rgba(120, 37, 114, 0.1);
+  font-weight: 600;
+  color: $prpl-dark;
+  padding: 0.75rem 1rem;
+  border-radius: $border-radius $border-radius 0 0;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-title {
+  color: $prpl-dark;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 2px solid $prpl-medium;
+  padding-bottom: 0.5rem;
+}
+
+/* ===== DASHBOARD CARDS ===== */
+.dashboard-card {
+  min-height: 140px;
+}
+
+.dashboard-card .card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-card .card-title {
+  flex-shrink: 0;
+}
+
+/* Dashboard WiFi cards - consistent sizing */
+.wifi-card {
+  min-height: 180px;
+}
+
+.wifi-card .row {
+  font-size: 0.85rem;
+}
+
+/* ===== WAN CONFIG CARDS ===== */
+.wan-config-card {
+  margin-bottom: 1.5rem;
+}
+
+.wan-config-card .card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wan-config-card .interface-section {
+  background: $prpl-lighter;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: 1px solid rgba(120, 37, 114, 0.08);
+}
+
+.wan-config-card .interface-section h6 {
+  color: $prpl-dark;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid $prpl-medium;
+}
+
+/* logo for login page */
+.logo {
+  width: 200px;
+  height: 100px;
+  background-image: url('/assets/images/prpl-logo.png');
+  background-size: 125px 46px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.row .logo {
+  margin: 4em auto 1em auto;
+}
+
+.logo .label {
+  display: none;
+}
+
+/* vertical navbar */
+.navbar-vertical {
+  position: fixed;
+  display: inline-block;
+  width: 100%;
+  padding: 0;
+  z-index: 100;
+}
+
+.navbar-vertical.navbar-expand-xl {
+  width: 12.625rem;
+  height: calc(100vh - 4.3125rem);
+}
+
+.navbar-vertical .logo {
+  width: 100px;
+  height: 50px;
+  background-image: url('/assets/images/prpl-logo.png');
+  background-size: 97px 34px;
+  background-repeat: no-repeat;
+}
+
+.navbar-vertical .logo .label {
+  display: none;
+}
+
+.navbar-vertical a {
+  color: #000;
+  text-decoration: none;
+}
+
+.navbar-vertical .separator {
+  display: flex;
+  margin-top: 1em;
+  color: #878787;
+  font-size: 0.8em;
+}
+
+.navbar-vertical .separator span {
+  flex-grow: 1;
+}
+
+.navbar-vertical .separator span hr {
+  margin: 0.65rem 0 0 0.5rem;
+  opacity: 1;
+}
+
+.navbar-vertical.navbar-expand-xl+.content {
+  margin-left: 12.625rem;
+}
+
+.navbar-vertical .disabled a {
+  color: #999;
+}
+
+#top-header {
+  margin-bottom: 1em;
+  border-bottom: solid 2px $prpl-dark;
+  background-color: #fff;
+}
+
+#main {
+  margin-top: 4em;
+}
+
+.nav-tabs,
+.nav-pills {
+  padding-top: 0.45em;
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: $prpl-dark;
+}
+
+.nav-pills .nav-link.active {
+  background-color: $prpl-dark;
+}
+
+/* form elements */
+.form-label {
+  margin-left: 0.75rem;
+  font-size: 0.8rem;
+}
+
+.form-check {
+  padding-top: 0.45rem;
+  padding-bottom: 0.45rem;
+}  
+
+/* buttons */
+.btn-primary {
+  background-color: $prpl-dark;
+  border-color: $prpl-dark;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: darken($prpl-dark, 8%);
+  border-color: darken($prpl-dark, 8%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(120, 37, 114, 0.25);
+}
+
+.btn-primary:disabled {
+  background-color: $prpl-medium;
+  border-color: $prpl-dark;
+}
+
+/* ===== FORM CONTROLS ===== */
+.form-control, .form-select {
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: $prpl-dark;
+  box-shadow: 0 0 0 0.2rem rgba(120, 37, 114, 0.15);
+}
+
+.form-control:disabled {
+  background-color: #f8f9fa;
+}
+
+.col-form-label {
+  font-weight: 500;
+  color: #495057;
+  font-size: 0.85rem;
+}
+
+/* ===== LAYOUT UTILITIES ===== */
+.row-eq-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row-eq-height > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.row-eq-height > [class*='col-'] > .card {
+  flex: 1;
+}
+
+/* ===== STATUS INDICATORS ===== */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.status-indicator::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-indicator.status-enabled::before,
+.status-indicator.status-active::before {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  box-shadow: 0 0 6px rgba(40, 167, 69, 0.4);
+}
+
+.status-indicator.status-disabled::before,
+.status-indicator.status-inactive::before {
+  background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%);
+  box-shadow: 0 0 6px rgba(220, 53, 69, 0.4);
+}
+
+/* ===== RESPONSIVE IMPROVEMENTS ===== */
+@media (max-width: 768px) {
+  .wan-config-card {
+    margin-bottom: 1rem;
+  }
+  
+  .card-body {
+    padding: 0.75rem;
+  }
+}
+
+/* ===== DASHBOARD GRID ===== */
+.dashboard-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-row .card {
+  min-height: 140px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* ===== CHART CONTAINERS ===== */
+.chart-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+}
+
+/* ===== SCROLLABLE CONTENT ===== */
+.wan-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ===== CONFIG CARDS (LAN, WAN, etc.) ===== */
+.config-card {
+  height: auto;
+}
+
+.config-card .card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.config-section {
+  background: #fff;
+  border: 1px solid rgba(120, 37, 114, 0.1);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  height: 100%;
+}
+
+.config-section-header {
+  background: linear-gradient(135deg, $prpl-light 0%, #fff 100%);
+  color: $prpl-dark;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.625rem 1rem;
+  border-bottom: 1px solid rgba(120, 37, 114, 0.1);
+}
+
+.config-section-body {
+  padding: 1rem;
+}
+
+/* Form rows for config cards */
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.625rem;
+  gap: 0.75rem;
+}
+
+.form-row-label {
+  flex: 0 0 110px;
+  font-size: 0.8rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.form-row-input {
+  flex: 1;
+}
+
+.form-row-input .form-control-sm,
+.form-row-input .form-select-sm {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.65rem;
+}
+
+/* IPv6 items */
+.ipv6-item {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ipv6-item:last-child {
+  border-bottom: none;
+}
+
+.ipv6-alias {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.config-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Card actions */
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(120, 37, 114, 0.1);
+}
+
+/* ===== WAN CONFIG IMPROVEMENTS ===== */
+.wan-config-card .interface-section {
+  background: $prpl-lighter;
+  border-radius: 0.375rem;
+  padding: 0.875rem;
+  margin-top: 0.875rem;
+  border: 1px solid rgba(120, 37, 114, 0.08);
+}
+
+.wan-config-card .interface-section h6 {
+  color: $prpl-dark;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid $prpl-medium;
+}
+
+.wan-config-card .form-row {
+  margin-bottom: 0.5rem;
+}
+
+.wan-config-card .form-row-label {
+  flex: 0 0 90px;
+}
+
+/* Compact form controls */
+.form-control-sm,
+.form-select-sm {
+  border-radius: 0.25rem;
+}
+
+/* ===== RESPONSIVE CONFIG CARDS ===== */
+@media (max-width: 992px) {
+  .config-section {
+    margin-bottom: 1rem;
+  }
+  
+  .form-row {
+    flex-wrap: wrap;
+  }
+  
+  .form-row-label {
+    flex: 0 0 100%;
+    margin-bottom: 0.25rem;
+  }
+  
+  .form-row-input {
+    flex: 0 0 100%;
+  }
+}
+
+/* ===== INTERFACE SELECTOR TABS ===== */
+.interface-selector {
+  background: #fff;
+  border: 1px solid rgba(120, 37, 114, 0.12);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(120, 37, 114, 0.06);
+}
+
+.interface-selector-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.interface-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.interface-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: $prpl-lighter;
+  border: 1px solid rgba(120, 37, 114, 0.15);
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.interface-tab:hover {
+  background: $prpl-medium;
+  border-color: $prpl-dark;
+  color: $prpl-dark;
+}
+
+.interface-tab.active {
+  background: $prpl-dark;
+  border-color: $prpl-dark;
+  color: #fff;
+}
+
+.interface-tab.active .status-indicator::before {
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+}
+
+/* ===== OPTIMIZED CHARTS ===== */
+.chart-wrapper {
+  position: relative;
+  will-change: transform;
+}
+
+.chart-wrapper svg {
+  display: block;
+}
+
+/* Reduce chart animation jank */
+.chart-container {
+  contain: layout style paint;
+}
+
+/* ===== ALERTS ===== */
+.alert {
+  border-radius: 0.5rem;
+  border: none;
+}
+
+.alert-info {
+  background: $prpl-lighter;
+  color: $prpl-dark;
+}

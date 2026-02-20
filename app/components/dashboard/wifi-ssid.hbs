@@ -1,0 +1,26 @@
+<div class="card dashboard-card wifi-card">
+  <div class="card-body">
+    <h5 class="card-title text-truncate" title="{{@ssid.Alias}}">Wifi {{@ssid.Alias}}</h5>
+    <div class="row mb-1">
+      <div class="col-4"><small class="text-muted">Pkts</small></div>
+      <div class="col-8 text-end">
+        <small>
+          <Number @number={{@ssid.Stats.PacketsSent}} @dividers="1,1000,1000" @labels=",k,M" @precision="2"/> / 
+          <Number @number={{@ssid.Stats.PacketsReceived}} @dividers="1,1000,1000" @labels=",k,M" @precision="2"/>
+        </small>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-4"><small class="text-muted">Bytes</small></div>
+      <div class="col-8 text-end">
+        <small>
+          <Number @number={{@ssid.Stats.BytesSent}} @dividers="1,1024,1024,1024" @labels=",kB,MB,GB" @precision="2"/> / 
+          <Number @number={{@ssid.Stats.BytesReceived}} @dividers="1,1024,1024,1024" @labels=",kB,MB,GB" @precision="2"/>
+        </small>
+      </div>
+    </div>
+    <div class="chart-container">
+      <Chart::PacketChart @data={{this.packetData}} @numOfValues="25" @sKey="sBytes" @rKey="rBytes" @sColor="#782572" @rColor="#782572" @height="45" @dividers="1,1024,1024,1024" @labels="B,kB,MB,GB" @precision="2" />
+    </div>
+  </div>
+</div>

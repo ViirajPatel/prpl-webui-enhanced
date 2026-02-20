@@ -1,0 +1,33 @@
+{{page-title "WiFi"}}
+<h2>WiFi</h2>
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link {{if this.radiosTabActive "active"}}" {{on 'click' (fn this.setActiveTab 'radios')}}>Radios</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{if this.accesspointsTabActive "active"}}" {{on 'click' (fn this.setActiveTab 'accesspoints')}}>Access Points</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{if this.ssidsTabActive "active"}}" {{on 'click' (fn this.setActiveTab 'ssids')}}>SSIDs</a>
+  </li>
+</ul>
+
+{{#if this.radiosTabActive}}
+  {{#each @model.Radio as |radio|}}
+    <Wifi::Radio @radio={{radio}} />
+  {{/each}}
+{{/if}}
+
+{{#if this.accesspointsTabActive}}
+  {{#each @model.AccessPoint as |accesspoint|}}
+    <Wifi::Accesspoint @accesspoint={{accesspoint}} />
+  {{/each}}
+{{/if}}
+
+{{#if this.ssidsTabActive}}
+  {{#each @model.SSID as |ssid|}}
+    <Wifi::Ssid @ssid={{ssid}} />
+  {{/each}}
+{{/if}}
+
+<button type="button" class="btn btn-primary" {{on "click" this.updateWifi}} disabled={{unless this.hasChanges "disabled"}}>Update</button>

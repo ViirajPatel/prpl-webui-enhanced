@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-header">
+    <StatusIndicator @status={{@unit.Resolved}} @statusKey="1"/> {{@unit.Alias}}
+  </div>
+  <div class="card-body">
+    <h6>{{@unit.Name}}</h6>
+    Status: {{@unit.Status}}<br />
+    URL: {{@unit.URL}}<br />
+    UUID: {{@unit.UUID}}<br />
+    Vendor: {{@unit.Vendor}}<br />
+    Version: {{@unit.Version}}
+  </div>
+</div>

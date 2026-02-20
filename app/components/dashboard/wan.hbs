@@ -1,0 +1,8 @@
+<div class="card dashboard-card">
+  <div class="card-body">
+    <h5 class="card-title">WAN</h5>
+    <div class="chart-container" style="min-height: 60px;">
+      <Chart::PacketChart @data={{this.statisticData}} @numOfValues="25" @sKey="sBytes" @rKey="rBytes" @sColor="#782572" @rColor="#782572" @height="60" @dividers="1,1024,1024,1024" @labels="B,kB,MB,GB" @precision="2" />
+    </div>
+  </div>
+</div>

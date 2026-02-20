@@ -1,0 +1,41 @@
+<div class="row mb-2">
+  <div class="col-md-3">
+    <label class="col-form-label">Encryption</label>
+  </div>
+  <div class="col-md-9">
+    <Helper::Select class="form-select" @options={{this.encryptionModes}} @value={{@security.ModeEnabled}} @optValue="key" @optLabel="label" @onChange={{this.setEncryptionMode}} />
+  </div>
+</div>
+
+{{#if isWep}}
+<div class="row mb-2">
+  <div class="col-md-3">
+    <label class="col-form-label">WEP Key</label>
+  </div>
+  <div class="col-md-9">
+    <Input class="form-control" type="text" @value={{@security.WEPKey}} />
+  </div>
+</div>
+{{/if}}
+
+{{#if isWpa}}
+<div class="row mb-2">
+  <div class="col-md-3">
+    <label class="col-form-label">Passphrase</label>
+  </div>
+  <div class="col-md-9">
+    <Input class="form-control" type="text" @value={{@security.KeyPassPhrase}} />
+  </div>
+</div>
+{{/if}}
+
+{{#if isSae}}
+<div class="row mb-2">
+  <div class="col-md-3">
+    <label class="col-form-label">SAE Passphrase</label>
+  </div>
+  <div class="col-md-9">
+    <Input class="form-control" type="text" @value={{@security.SAEPassphrase}} />
+  </div>
+</div>
+{{/if}}

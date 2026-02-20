@@ -1,0 +1,22 @@
+<div class="card dashboard-card">
+  <div class="card-body">
+    <div class="row align-items-center">
+      <div class="col-7">
+        <h5 class="card-title">Memory</h5>
+        <div class="mb-1">
+          <small class="text-muted">Total:</small>
+          <strong class="ms-1"><Number @number={{@status.Total}} @dividers="1,1024,1024,1024" @labels=",kB,MB,GB" @precision="2" /></strong>
+        </div>
+        <div>
+          <small class="text-muted">Free:</small>
+          <strong class="ms-1"><Number @number={{@status.Free}} @dividers="1,1024,1024,1024" @labels=",kB,MB,GB" @precision="2" /></strong>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="chart-container">
+          <Chart::DonutChart @data={{this.data}} @color="#782572 #be93B9" @width="70" @height="70" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="card config-card mb-4">
+  <div class="card-header">
+    <StatusIndicator @status={{@interface.Status}} @statusKey="Up"/> {{@interface.Alias}}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      {{! IPv4 Section }}
+      <div class="col-lg-6">
+        <div class="config-section">
+          <div class="config-section-header">IPv4</div>
+          <div class="config-section-body">
+            {{#each @interface.IPv4Address as |IPv4Address index|}}
+              {{#if (gt index 0)}}<hr class="my-3">{{/if}}
+              <Ipv4Address @address={{IPv4Address}} />
+            {{/each}}
+          </div>
+        </div>
+      </div>
+      {{! IPv6 Section }}
+      <div class="col-lg-6">
+        <div class="config-section">
+          <div class="config-section-header">IPv6</div>
+          <div class="config-section-body">
+            <div class="row mb-2">
+              <div class="col-6">
+                <span class="config-label">Addresses</span>
+              </div>
+              <div class="col-6">
+                <span class="config-label">Prefixes</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                {{#each @interface.IPv6Address as |IPv6Address|}}
+                  <div class="ipv6-item">
+                    <span class="ipv6-alias">{{IPv6Address.Alias}}</span>
+                  </div>
+                {{/each}}
+              </div>
+              <div class="col-6">
+                {{#each @interface.IPv6Prefix as |IPv6Prefix|}}
+                  <div class="ipv6-item">
+                    <span class="ipv6-alias">{{IPv6Prefix.Alias}}</span>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{! Single Update Button for entire card }}
+    <div class="card-actions">
+      <button type="button" class="btn btn-primary" {{on "click" this.updateInterface}} disabled={{unless this.hasChanges "disabled"}}>Update</button>
+    </div>
+  </div>
+</div>

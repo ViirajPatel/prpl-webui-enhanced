@@ -1,0 +1,46 @@
+<div class="card mb-3">
+  <div class="card-header">
+   <StatusIndicator @status={{@ssid.Status}} @statusKey="Enabled"/> {{@ssid.Alias}}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+
+        <div class="row mb-2">
+          <div class="col-md-3"></div>
+          <div class="col-md-9">
+            <Input @type="checkbox" @value="{{@ssid.Enable}}" @checked={{this.enabled}} class="form-check-input" />
+            <label class="form-check-label">Enable</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-3">
+            <label class="col-form-label">SSID</label>
+          </div>
+          <div class="col-md-9">
+            <Input class="form-control" type="text" @value={{@ssid.SSID}} />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-6">
+
+        <div class="row mb-2">
+          <div class="col-md-12">&nbsp;</div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-3">
+            <label class="col-form-label">MAC Address</label>
+          </div>
+          <div class="col-md-9">
+            <label class="col-form-label">{{@ssid.MACAddress}}</label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div >
+</div>

@@ -1,0 +1,51 @@
+<div class="interface-section">
+  <h6>Interface {{@index}}</h6>
+  <div class="form-row">
+    <label class="form-row-label">Alias</label>
+    <div class="form-row-input">
+      <Input class="form-control form-control-sm" type="text" @value={{@iface.Alias}} />
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="form-row-label">IPv4 Mode</label>
+    <div class="form-row-input">
+      <Helper::Select class="form-select form-select-sm" @options={{this.IPv4ModeOptions}} @value={{@iface.IPv4Mode}} @optValue="key" @optLabel="label" @onChange={{this.setIPv4Mode}} />
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="form-row-label">IPv6 Mode</label>
+    <div class="form-row-input">
+      <Helper::Select class="form-select form-select-sm" @options={{this.IPv6ModeOptions}} @value={{@iface.IPv6Mode}} @optValue="key" @optLabel="label" @onChange={{this.setIPv6Mode}} />
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="form-row-label">Name</label>
+    <div class="form-row-input">
+      <Input class="form-control form-control-sm" type="text" @value={{@iface.Name}} disabled="disabled" />
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="form-row-label">Username</label>
+    <div class="form-row-input">
+      <Input class="form-control form-control-sm" type="text" @value={{@iface.Username}} disabled="disabled" />
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="form-row-label">Password</label>
+    <div class="form-row-input">
+      <Input class="form-control form-control-sm" type="text" @value={{@iface.Password}} disabled="disabled" />
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="form-row-label">VLAN ID</label>
+    <div class="form-row-input">
+      <Input class="form-control form-control-sm" type="text" @value={{@iface.VlanID}} disabled="disabled" />
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="form-row-label">VLAN Priority</label>
+    <div class="form-row-input">
+      <Input class="form-control form-control-sm" type="text" @value={{@iface.VlanPriority}} disabled="disabled" />
+    </div>
+  </div>
+</div>
