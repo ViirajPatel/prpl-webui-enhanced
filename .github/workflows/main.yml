@@ -1,0 +1,33 @@
+name: Create Release Archive
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers on tags like v1.0.0
+
+jobs:
+  build-and-archive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: [actions/checkout@v4](https://github.com)
+
+      - name: Install Dependencies & Build Ember App
+        run: |
+          npm install
+          npm run build -- -prod
+
+      - name: Create tar.gz of dist
+        run: |
+          # Get repo name and create archive
+          REPO_NAME=$(basename ${{ github.repository }})
+          tar -czvf "$REPO_NAME.tar.gz" dist/
+          # Export filename for the next step
+          echo "ASSET_NAME=$REPO_NAME.tar.gz" >> $GITHUB_ENV
+
+      - name: Upload to GitHub Release
+        uses: [softprops/action-gh-release@v2](https://github.com)
+        with:
+          files: ${{ env.ASSET_NAME }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
