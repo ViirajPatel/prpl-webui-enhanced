@@ -1,0 +1,125 @@
+<div class="card" data-test-rules-table>
+  <div class="card-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="card-title mb-0">
+        <i class="fas fa-shield-alt me-2"></i>
+        Firewall Rules
+      </h5>
+      <div class="d-flex align-items-center gap-2">
+        {{#if this.availableChains.length}}
+          <label class="form-label mb-0 me-2">Chain:</label>
+          <select 
+            class="form-select form-select-sm"
+            style="width: auto;"
+            data-test-chain-selector
+            {{on "change" this.selectChain}}
+          >
+            {{#each this.availableChains as |chain|}}
+              <option value={{chain.Alias}} selected={{eq this.selectedChainAlias chain.Alias}}>
+                {{chain.Name}}
+              </option>
+            {{/each}}
+          </select>
+        {{/if}}
+        
+        {{#if this.canAddRules}}
+          <button 
+            type="button" 
+            class="btn btn-sm btn-success"
+            data-test-add-rule-btn
+            {{on "click" this.addRule}}
+          >
+            <i class="fas fa-plus me-1"></i>
+            Add Rule
+          </button>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    {{#if this.currentChain}}
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th style="width: 50px;">Enabled</th>
+              <th style="width: 100px;">Action</th>
+              <th style="width: 80px;">Protocol</th>
+              <th>Source IP</th>
+              <th>Source Port</th>
+              <th>Dest IP</th>
+              <th>Dest Port</th>
+              <th style="width: 80px;">Status</th>
+              {{#if this.canAddRules}}
+                <th style="width: 100px;">Actions</th>
+              {{/if}}
+            </tr>
+          </thead>
+          <tbody>
+            {{#if this.currentRules.length}}
+              {{#each this.currentRules as |rule|}}
+              {{!-- {{log rule}} --}}
+                <tr data-test-rule-row>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input 
+                        type="checkbox" 
+                        class="form-check-input"
+                        checked={{rule.Enable}}
+                        data-test-rule-toggle
+                        {{on "change" (fn this.toggleRule rule)}}
+                      >
+                    </div>
+                  </td>
+                  <td>
+                    <span class="badge" style={{rule.targetBadgeStyle}}>
+                      {{rule.Target}}
+                    </span>
+                  </td>
+                  <td>{{rule.protocolName}}</td>
+                  <td>{{rule.sourceIPDisplay}}</td>
+                  <td>{{rule.sourcePortDisplay}}</td>
+                  <td>{{rule.destIPDisplay}}</td>
+                  <td>{{rule.destPortDisplay}}</td>
+                  <td>
+                    <span class="badge bg-{{if rule.Enable "success" "secondary"}}">
+                      {{if rule.Enable "Enabled" "Disabled"}}
+                    </span>
+                  </td>
+                  {{#if this.canAddRules}}
+                    <td>
+                      <button 
+                        class="btn btn-sm btn-outline-danger"
+                        data-test-delete-rule-btn type="button" {{on "click" (fn this.deleteRule rule)}}
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  {{/if}}
+                </tr>
+              {{/each}}
+            {{else}}
+              <tr>
+                <td colspan={{if this.canAddRules "9" "8"}} class="text-center text-muted py-4" data-test-empty-rules>
+                  No rules in this chain
+                </td>
+              </tr>
+            {{/if}}
+          </tbody>
+        </table>
+      </div>
+    {{else}}
+      <div class="alert alert-info m-3" role="alert" data-test-loading-message>
+        <i class="fas fa-info-circle me-2"></i>
+        Loading firewall chains...
+      </div>
+    {{/if}}
+  </div>
+
+  {{#if this.currentChain}}
+    <div class="card-footer text-muted small" data-test-rule-count>
+      {{this.currentChain.RuleNumberOfEntries}} rule(s) in {{this.currentChain.Name}}
+    </div>
+  {{/if}}
+</div>

@@ -15,6 +15,8 @@ Router.map(function () {
     this.route('wan');
     this.route('lcm');
     this.route('wifi');
+    this.route('firewall');
+    this.route('hosts');
   });
   this.route('loading');
 });

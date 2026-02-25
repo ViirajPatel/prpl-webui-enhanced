@@ -6,6 +6,9 @@ export default class WanManagerModel extends Model {
   @hasMany('wanmanager-wan') WAN;
 
   @attr({
-    defaultValue() { return 'X_PRPLWARE-COM_WANManager.'; }
-  }) _namespace;
+    defaultValue() {
+      return 'X_PRPLWARE-COM_WANManager.';
+    },
+  })
+  _namespace;
 }

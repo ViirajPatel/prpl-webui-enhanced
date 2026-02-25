@@ -4,9 +4,9 @@
   <li class="nav-item">
     <a class="nav-link {{if this.radiosTabActive "active"}}" {{on 'click' (fn this.setActiveTab 'radios')}}>Radios</a>
   </li>
-  <li class="nav-item">
+  {{!-- <li class="nav-item">
     <a class="nav-link {{if this.accesspointsTabActive "active"}}" {{on 'click' (fn this.setActiveTab 'accesspoints')}}>Access Points</a>
-  </li>
+  </li> --}}
   <li class="nav-item">
     <a class="nav-link {{if this.ssidsTabActive "active"}}" {{on 'click' (fn this.setActiveTab 'ssids')}}>SSIDs</a>
   </li>
@@ -18,15 +18,15 @@
   {{/each}}
 {{/if}}
 
-{{#if this.accesspointsTabActive}}
+{{!-- {{#if this.accesspointsTabActive}}
   {{#each @model.AccessPoint as |accesspoint|}}
     <Wifi::Accesspoint @accesspoint={{accesspoint}} />
   {{/each}}
-{{/if}}
+{{/if}} --}}
 
 {{#if this.ssidsTabActive}}
-  {{#each @model.SSID as |ssid|}}
-    <Wifi::Ssid @ssid={{ssid}} />
+  {{#each this.unifiedSSIDCards key="accesspoint.id" as |card|}}
+    <Wifi::UnifiedSsidCard @card={{card}} />
   {{/each}}
 {{/if}}
 

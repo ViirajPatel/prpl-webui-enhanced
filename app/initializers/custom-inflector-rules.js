@@ -5,6 +5,8 @@ export function initialize(/* application */) {
 
   inflector.uncountable('stats');
   inflector.uncountable('softwaremodules');
+  inflector.uncountable('hosts');
+  inflector.uncountable('wanstats');
 }
 
 export default {

@@ -6,14 +6,15 @@ export default class AuthenticatedDhcpv4Controller extends Controller {
   @tracked selectedPoolAlias = null;
 
   get pools() {
-    return this.model.Server.Pool || [];
+    let server = this.model.get('Server');
+    return (server && server.get('Pool')) || [];
   }
 
   get selectedPool() {
     if (!this.selectedPoolAlias && this.pools.length > 0) {
       return this.pools[0];
     }
-    return this.pools.find(pool => pool.Alias === this.selectedPoolAlias);
+    return this.pools.find((pool) => pool.Alias === this.selectedPoolAlias);
   }
 
   @action

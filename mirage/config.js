@@ -6,6 +6,8 @@ import { data as wanManager } from './fixtures/wan-manager';
 import { data as ctulhu } from './fixtures/ctulhu';
 import { data as softwareModules } from './fixtures/software-modules';
 import { data as wifi } from './fixtures/wifi';
+import { data as firewall } from './fixtures/firewall';
+import { data as hosts } from './fixtures/hosts';
 
 var ipCounters = {};
 var wifiCounters = {};
@@ -48,17 +50,17 @@ export default function (config) {
 
       this.post('/session', (schema, request) => {
         let attrs = JSON.parse(request.requestBody);
-        
-        if( attrs.username === 'admin' && attrs.password === 'admin') {
+
+        if (attrs.username === 'admin' && attrs.password === 'admin') {
           return {
             absoluteTimeout: 3600,
             idleTimeout: 600,
-            sessionId: Math.random() * 100000
+            sessionId: Math.random() * 100000,
           };
         } else {
           return false;
         }
-      })
+      });
 
       this.get('/serviceElements/Device.DeviceInfo.', () => {
         // randomize CPU usage
@@ -79,16 +81,30 @@ export default function (config) {
         ip.filter((entry, index) => {
           if (entry.path.match(/^IP\.Interface\.[0-9]+\.Stats/)) {
             if (!ipCounters[entry.path]) {
-              ipCounters[entry.path] = { rxPackets: 0, txPackets: 0, rxBytes: 0, txBytes: 0};
+              ipCounters[entry.path] = {
+                rxPackets: 0,
+                txPackets: 0,
+                rxBytes: 0,
+                txBytes: 0,
+              };
             }
 
-            ipCounters[entry.path].txPackets += Math.floor(Math.random() * 1000);
-            ipCounters[entry.path].rxBPackets += Math.floor(Math.random() * 1000);
-            ipCounters[entry.path].txBytes += Math.floor(Math.random() * 1000000);
-            ipCounters[entry.path].rxBytes += Math.floor(Math.random() * 1000000);
+            ipCounters[entry.path].txPackets += Math.floor(
+              Math.random() * 1000
+            );
+            ipCounters[entry.path].rxBPackets += Math.floor(
+              Math.random() * 1000
+            );
+            ipCounters[entry.path].txBytes += Math.floor(
+              Math.random() * 1000000
+            );
+            ipCounters[entry.path].rxBytes += Math.floor(
+              Math.random() * 1000000
+            );
 
             ip[index].parameters.PacketsSent = ipCounters[entry.path].txPackets;
-            ip[index].parameters.PacketsReceived = ipCounters[entry.path].rxPackets;
+            ip[index].parameters.PacketsReceived =
+              ipCounters[entry.path].rxPackets;
             ip[index].parameters.BytesSent = ipCounters[entry.path].txBytes;
             ip[index].parameters.BytesReceived = ipCounters[entry.path].rxBytes;
             return true;
@@ -118,23 +134,64 @@ export default function (config) {
         wifi.filter((entry, index) => {
           if (entry.path.match(/^WiFi\.SSID\.[0-9]+\.Stats/)) {
             if (!wifiCounters[entry.path]) {
-              wifiCounters[entry.path] = { rxPackets: 0, txPackets: 0, rxBytes: 0, txBytes: 0 };
+              wifiCounters[entry.path] = {
+                rxPackets: 0,
+                txPackets: 0,
+                rxBytes: 0,
+                txBytes: 0,
+              };
             }
 
-            wifiCounters[entry.path].txPackets += Math.floor(Math.random() * 100);
-            wifiCounters[entry.path].rxPackets += Math.floor(Math.random() * 100);
-            wifiCounters[entry.path].txBytes += Math.floor(Math.random() * 100000);
-            wifiCounters[entry.path].rxBytes += Math.floor(Math.random() * 100000);
+            wifiCounters[entry.path].txPackets += Math.floor(
+              Math.random() * 100
+            );
+            wifiCounters[entry.path].rxPackets += Math.floor(
+              Math.random() * 100
+            );
+            wifiCounters[entry.path].txBytes += Math.floor(
+              Math.random() * 100000
+            );
+            wifiCounters[entry.path].rxBytes += Math.floor(
+              Math.random() * 100000
+            );
 
-            wifi[index].parameters.PacketsSent = wifiCounters[entry.path].txPackets;
-            wifi[index].parameters.PacketsReceived = wifiCounters[entry.path].rxPackets;
+            wifi[index].parameters.PacketsSent =
+              wifiCounters[entry.path].txPackets;
+            wifi[index].parameters.PacketsReceived =
+              wifiCounters[entry.path].rxPackets;
             wifi[index].parameters.BytesSent = wifiCounters[entry.path].txBytes;
-            wifi[index].parameters.BytesReceived = wifiCounters[entry.path].rxBytes;
+            wifi[index].parameters.BytesReceived =
+              wifiCounters[entry.path].rxBytes;
             return true;
           }
         });
 
         return wifi;
+      });
+
+      this.get('/serviceElements/Device.Firewall.', () => {
+        return firewall;
+      });
+
+      this.get('/serviceElements/Device.Hosts.', () => {
+        return hosts;
+      });
+
+      this.patch('/serviceElements/Device.Firewall.', (schema, request) => {
+        // Parse the incoming request body and update the fixture
+        const updates = JSON.parse(request.requestBody);
+
+        if (updates.parameters) {
+          const firewallData = firewall.find(
+            (item) => item.path === 'Firewall.'
+          );
+          if (firewallData) {
+            Object.assign(firewallData.parameters, updates.parameters);
+          }
+        }
+
+        // Return the full firewall array (same format as GET)
+        return firewall;
       });
     },
   };

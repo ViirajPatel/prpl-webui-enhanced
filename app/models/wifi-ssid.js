@@ -13,6 +13,9 @@ export default class WifiSsidModel extends Model {
   @belongsTo('wifi-ssid-stats', { async: false }) Stats;
 
   @attr({
-    defaultValue() { return 'WiFi.SSID.'; }
-  }) _namespace;
+    defaultValue() {
+      return 'WiFi.SSID.';
+    },
+  })
+  _namespace;
 }

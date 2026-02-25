@@ -28,7 +28,7 @@ export default class WanWanmanagerComponent extends Component {
     if (!this.selectedWanAlias && this.wans.length > 0) {
       return this.wans[0];
     }
-    return this.wans.find(wan => wan.Alias === this.selectedWanAlias);
+    return this.wans.find((wan) => wan.Alias === this.selectedWanAlias);
   }
 
   @action

@@ -12,10 +12,10 @@ export default class AuthenticatedLanController extends Controller {
   }
 
   get interfaceOptions() {
-    return this.interfaces.map(iface => ({
+    return this.interfaces.map((iface) => ({
       key: iface.Alias,
       label: iface.Alias,
-      interface: iface
+      interface: iface,
     }));
   }
 
@@ -23,7 +23,9 @@ export default class AuthenticatedLanController extends Controller {
     if (!this.selectedInterfaceAlias && this.interfaces.length > 0) {
       return this.interfaces[0];
     }
-    return this.interfaces.find(iface => iface.Alias === this.selectedInterfaceAlias);
+    return this.interfaces.find(
+      (iface) => iface.Alias === this.selectedInterfaceAlias
+    );
   }
 
   @action

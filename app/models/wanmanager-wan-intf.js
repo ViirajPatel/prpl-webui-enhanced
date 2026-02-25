@@ -13,5 +13,4 @@ export default class WanmanagerWanIntfModel extends Model {
   @attr VlanPriority;
   @belongsTo('ip-interface') IPv4Reference;
   @belongsTo('ip-interface') IPv6Reference;
-  
 }

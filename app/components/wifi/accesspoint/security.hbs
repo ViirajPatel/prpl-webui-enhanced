@@ -11,9 +11,20 @@
 <div class="row mb-2">
   <div class="col-md-3">
     <label class="col-form-label">WEP Key</label>
+    <small class="d-block text-muted mt-1">5 or 13 bytes hex</small>
   </div>
   <div class="col-md-9">
-    <Input class="form-control" type="text" @value={{@security.WEPKey}} />
+    <Input 
+      class="form-control {{if this.wepKeyError 'is-invalid'}}" 
+      type="text" 
+      @value={{@security.WEPKey}}
+      placeholder="10 or 26 hex characters (0-9, A-F)"
+    />
+    {{#if this.wepKeyError}}
+      <small class="d-block text-danger mt-2">
+        <strong>Error:</strong> {{this.wepKeyError}}
+      </small>
+    {{/if}}
   </div>
 </div>
 {{/if}}
@@ -22,9 +33,20 @@
 <div class="row mb-2">
   <div class="col-md-3">
     <label class="col-form-label">Passphrase</label>
+    <small class="d-block text-muted mt-1">8-63 characters or 64 hex</small>
   </div>
   <div class="col-md-9">
-    <Input class="form-control" type="text" @value={{@security.KeyPassPhrase}} />
+    <Input 
+      class="form-control {{if this.keyPassPhraseError 'is-invalid'}}" 
+      type="text" 
+      @value={{@security.KeyPassPhrase}}
+      placeholder="8-63 characters or 64 hex digits"
+    />
+    {{#if this.keyPassPhraseError}}
+      <small class="d-block text-danger mt-2">
+        <strong>Error:</strong> {{this.keyPassPhraseError}}
+      </small>
+    {{/if}}
   </div>
 </div>
 {{/if}}
@@ -33,9 +55,20 @@
 <div class="row mb-2">
   <div class="col-md-3">
     <label class="col-form-label">SAE Passphrase</label>
+    <small class="d-block text-muted mt-1">8-63 characters</small>
   </div>
   <div class="col-md-9">
-    <Input class="form-control" type="text" @value={{@security.SAEPassphrase}} />
+    <Input 
+      class="form-control {{if this.saePassphraseError 'is-invalid'}}" 
+      type="text" 
+      @value={{@security.SAEPassphrase}}
+      placeholder="8-63 characters"
+    />
+    {{#if this.saePassphraseError}}
+      <small class="d-block text-danger mt-2">
+        <strong>Error:</strong> {{this.saePassphraseError}}
+      </small>
+    {{/if}}
   </div>
 </div>
 {{/if}}

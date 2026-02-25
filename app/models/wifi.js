@@ -6,6 +6,9 @@ export default class WiFiModel extends Model {
   @hasMany('wifi-ssid', { async: false }) SSID;
 
   @attr({
-    defaultValue() { return 'WiFi.'; }
-  }) _namespace;
+    defaultValue() {
+      return 'WiFi.';
+    },
+  })
+  _namespace;
 }

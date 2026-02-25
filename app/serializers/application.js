@@ -2,7 +2,13 @@ import JSONAPISerializer from '@ember-data/serializer/json-api';
 import { camelize, decamelize, capitalize } from '@ember/string';
 
 export default class DeviceInfoSerializer extends JSONAPISerializer {
-  normalizeFindRecordResponse(store, primaryModelClass, payload, id, requestType) {
+  normalizeFindRecordResponse(
+    store,
+    primaryModelClass,
+    payload,
+    id,
+    requestType
+  ) {
     payload = this.processResponse(store, payload);
     payload.data = payload.data[0];
 
@@ -19,6 +25,25 @@ export default class DeviceInfoSerializer extends JSONAPISerializer {
     payload = this.processResponse(store, payload);
 
     return super.normalizeFindAllResponse(
+      store,
+      primaryModelClass,
+      payload,
+      id,
+      requestType
+    );
+  }
+
+  normalizeUpdateRecordResponse(
+    store,
+    primaryModelClass,
+    payload,
+    id,
+    requestType
+  ) {
+    payload = this.processResponse(store, payload);
+    payload.data = payload.data[0];
+
+    return super.normalizeUpdateRecordResponse(
       store,
       primaryModelClass,
       payload,
@@ -47,7 +72,7 @@ export default class DeviceInfoSerializer extends JSONAPISerializer {
     if (testDevice) {
       record.path = testDevice[0];
     }
-    
+
     // remove "X_PRPLWARE-COM_" prefix if present
     let testXPrpl = record.path.match(/(?<=X_PRPLWARE-COM_).+/);
     if (testXPrpl) {
@@ -57,49 +82,53 @@ export default class DeviceInfoSerializer extends JSONAPISerializer {
     let path = record.path.match(/\b(?![0-9])\w+/g);
     var isArr = record.path.match(/\.[0-9]+\.$/) ? true : false;
     var type = '';
-    
+
     if (!namespace.path) namespace.path = path;
 
     // check if the last item is a number -> array
     let regs = 0;
     type = path[path.length - 1];
-    
+
     let model = null;
     try {
-      model = (store.modelFor(this.recordType(path))) 
-    } catch (err) { } 
+      model = store.modelFor(this.recordType(path));
+    } catch (err) {}
 
     if (model) {
+      let item = this.normalizeRecord(
+        store,
+        record,
+        record.path,
+        this.recordType(path)
+      );
 
-    let item = this.normalizeRecord(store, record, record.path, this.recordType(path));
-
-    // check if the current item is at the same level than the previously processed item
-    if (namespace.path.length < path.length) {
-      parents.push(prev.item);
-      namespace.path = path;
-    } else if (namespace.path.length > path.length) {
-      for (
-        var i = namespace.path.length - 1;
-        i >= namespace.path.length - path.length;
-        i--
-      ) {
-        if (parents.length >= path.length) {
-          parents.pop();
+      // check if the current item is at the same level than the previously processed item
+      if (namespace.path.length < path.length) {
+        parents.push(prev.item);
+        namespace.path = path;
+      } else if (namespace.path.length > path.length) {
+        for (
+          var i = namespace.path.length - 1;
+          i >= namespace.path.length - path.length;
+          i--
+        ) {
+          if (parents.length >= path.length) {
+            parents.pop();
+          }
         }
+        namespace.path = path;
       }
-      namespace.path = path;
-    }
 
-    // check if the model is of the root model
-    if (record.path === path[0] + '.') {
-      result.data.push(item);
-    } else {
-      // push the record into included and add the relationship
-      result.included.push(item);
-      this.addRelationship(item, type, parents, path, isArr);
-    }
+      // check if the model is of the root model
+      if (record.path === path[0] + '.') {
+        result.data.push(item);
+      } else {
+        // push the record into included and add the relationship
+        result.included.push(item);
+        this.addRelationship(item, type, parents, path, isArr);
+      }
 
-    prev.item = item;
+      prev.item = item;
     }
   }
 
@@ -142,28 +171,36 @@ export default class DeviceInfoSerializer extends JSONAPISerializer {
     try {
       model = store.modelFor(type);
     } catch {}
-    
-    if(model) {
+
+    if (model) {
       model.eachRelationship((key, descriptor) => {
-        if (attributes.hasOwnProperty(key)) {      
+        if (attributes.hasOwnProperty(key)) {
           let isArr = descriptor.kind === 'hasMany' ? true : false;
           if (!relationships.hasOwnProperty(key))
             relationships[key] = isArr ? { data: [] } : { data: null };
-          
-          if (attributes[key]) { // check if attribute value is available
-            let refId = attributes[key].match(/(?<=Device\.).+/)[0]; // remove trailing "Device."
+
+          if (attributes[key]) {
+            // check if attribute value is available
+            let deviceMatch = attributes[key].match(/(?<=Device\.).+/);
+            let refId = deviceMatch ? deviceMatch[0] : attributes[key]; // remove leading "Device." if present
+
+            // Ensure trailing dot to match record path ID format
+            if (refId && !refId.endsWith('.')) {
+              refId += '.';
+            }
+
             let relItem = { id: refId, type: descriptor.type };
-            
+
             if (isArr) {
               relationships[key].data.push(relItem);
             } else {
               relationships[key].data = relItem;
             }
-          
+
             // remove attribute
             delete attributes[key];
           }
-        } 
+        }
       });
     }
 
@@ -176,7 +213,7 @@ export default class DeviceInfoSerializer extends JSONAPISerializer {
     if (Object.keys(relationships).length) {
       item['relationships'] = relationships;
     }
-    
+
     return item;
   }
 

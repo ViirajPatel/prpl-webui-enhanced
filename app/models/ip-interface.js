@@ -24,6 +24,9 @@ export default class IpInterfaceModel extends Model {
   @belongsTo('ip-interface-stats') Stats;
 
   @attr({
-    defaultValue() { return 'IP.Interface.'; }
-  }) _namespace;
+    defaultValue() {
+      return 'IP.Interface.';
+    },
+  })
+  _namespace;
 }

@@ -10,7 +10,10 @@ export default class DeviceInfoModel extends Model {
   @belongsTo('deviceinfo-memorystatus') MemoryStatus;
   @belongsTo('deviceinfo-processstatus') ProcessStatus;
 
- @attr({
-  defaultValue() { return 'DeviceInfo.'; }
-}) _namespace;
+  @attr({
+    defaultValue() {
+      return 'DeviceInfo.';
+    },
+  })
+  _namespace;
 }

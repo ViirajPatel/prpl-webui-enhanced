@@ -9,18 +9,10 @@ export default class AuthenticatedDashboardController extends Controller {
   @tracked CPUdata;
   @tracked WiFiSSIDStatistics;
   @tracked WANStatistics;
-  @tracked selectedWifiIndex = 0;
-
-  get selectedWifiSsid() {
-    if (this.model?.wifi?.SSID?.length > 0) {
-      return this.model.wifi.SSID[this.selectedWifiIndex];
-    }
-    return null;
-  }
 
   @action
   selectWifi(index) {
-    this.selectedWifiIndex = index;
+    // This action is no longer used in the template but kept for backward compatibility
   }
 
   init() {

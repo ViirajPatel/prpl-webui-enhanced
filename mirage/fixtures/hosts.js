@@ -1,0 +1,257 @@
+export const data = [
+  {
+    parameters: {
+      AccessControlNumberOfEntries: 0,
+      CleanupHostsThreshold: -1,
+      HostNumberOfEntries: 7,
+    },
+    path: 'Hosts.',
+  },
+  {
+    parameters: {
+      Active: 1,
+      ActiveLastChange: '2026-02-23T09:38:15.538052993Z',
+      AssociatedDevice: '',
+      DHCPClient: 'Device.DHCPv4.Server.Pool.1.Client.2',
+      HostName: 'VANWCDFN5NV2',
+      IPAddress: '192.168.1.2',
+      IPv4AddressNumberOfEntries: 1,
+      IPv6AddressNumberOfEntries: 0,
+      InterfaceType: 'Ethernet',
+      Layer1Interface: 'Device.Ethernet.Interface.2',
+      Layer3Interface: 'Device.IP.Interface.3',
+      PhysAddress: 'C8:F7:50:61:26:25',
+      'X_PRPLWARE-COM_Protected': 0,
+    },
+    path: 'Hosts.Host.1.',
+  },
+  {
+    parameters: {
+      IPAddress: '192.168.1.2',
+    },
+    path: 'Hosts.Host.1.IPv4Address.1.',
+  },
+  {
+    parameters: {
+      BytesReceived: 0,
+      BytesSent: 0,
+      PacketsReceived: 0,
+      PacketsSent: 0,
+    },
+    path: 'Hosts.Host.1.WANStats.',
+  },
+  {
+    parameters: {
+      Active: 1,
+      ActiveLastChange: '2026-02-23T09:38:37.397602380Z',
+      AssociatedDevice: '',
+      DHCPClient: '',
+      HostName: 'PC-ID-e7823a53-9d81-466c-8287-72d6847b8e00',
+      IPAddress: '192.168.1.3',
+      IPv4AddressNumberOfEntries: 1,
+      IPv6AddressNumberOfEntries: 0,
+      InterfaceType: 'Ethernet',
+      Layer1Interface: 'Device.Ethernet.Interface.2',
+      Layer3Interface: 'Device.IP.Interface.3',
+      PhysAddress: '08:00:27:19:65:FE',
+      'X_PRPLWARE-COM_Protected': 0,
+    },
+    path: 'Hosts.Host.2.',
+  },
+  {
+    parameters: {
+      IPAddress: '192.168.1.3',
+    },
+    path: 'Hosts.Host.2.IPv4Address.1.',
+  },
+  {
+    parameters: {
+      BytesReceived: 0,
+      BytesSent: 0,
+      PacketsReceived: 0,
+      PacketsSent: 0,
+    },
+    path: 'Hosts.Host.2.WANStats.',
+  },
+  {
+    parameters: {
+      Active: 0,
+      ActiveLastChange: '2026-02-23T09:25:38.713882133Z',
+      AssociatedDevice: '',
+      DHCPClient: 'Device.DHCPv4.Server.Pool.1.Client.1',
+      HostName: 'PC-ID-d56e52a7-0a56-4ba9-a599-d3c16ea6dd0c',
+      IPAddress: '192.168.1.4',
+      IPv4AddressNumberOfEntries: 1,
+      IPv6AddressNumberOfEntries: 0,
+      InterfaceType: 'Wi-Fi',
+      Layer1Interface: 'Device.WiFi.Radio.1',
+      Layer3Interface: '',
+      PhysAddress: '0E:67:25:74:2A:05',
+      'X_PRPLWARE-COM_Protected': 0,
+    },
+    path: 'Hosts.Host.3.',
+  },
+  {
+    parameters: {
+      IPAddress: '192.168.1.4',
+    },
+    path: 'Hosts.Host.3.IPv4Address.1.',
+  },
+  {
+    parameters: {
+      BytesReceived: 0,
+      BytesSent: 0,
+      PacketsReceived: 0,
+      PacketsSent: 0,
+    },
+    path: 'Hosts.Host.3.WANStats.',
+  },
+  {
+    parameters: {
+      Active: 0,
+      ActiveLastChange: '2026-02-23T09:25:38.762168425Z',
+      AssociatedDevice: '',
+      DHCPClient: '',
+      HostName: 'PC-ID-e77d3019-468c-451b-86b4-716038c088fb',
+      IPAddress: '',
+      IPv4AddressNumberOfEntries: 0,
+      IPv6AddressNumberOfEntries: 0,
+      InterfaceType: 'Ethernet',
+      Layer1Interface: 'Device.Ethernet.Interface.2',
+      Layer3Interface: 'Device.IP.Interface.3',
+      PhysAddress: '00:55:7B:B5:7D:F8',
+      'X_PRPLWARE-COM_Protected': 0,
+    },
+    path: 'Hosts.Host.4.',
+  },
+  {
+    parameters: {
+      BytesReceived: 0,
+      BytesSent: 0,
+      PacketsReceived: 0,
+      PacketsSent: 0,
+    },
+    path: 'Hosts.Host.4.WANStats.',
+  },
+  {
+    parameters: {
+      Active: 1,
+      ActiveLastChange: '2026-02-23T09:31:52.989853609Z',
+      AssociatedDevice: '',
+      DHCPClient: 'Device.DHCPv4.Server.Pool.1.Client.3',
+      HostName: 'PC-ID-f7d0f244-e813-4fec-bf1a-4cba3e799819',
+      IPAddress: '192.168.1.5',
+      IPv4AddressNumberOfEntries: 1,
+      IPv6AddressNumberOfEntries: 1,
+      InterfaceType: 'Wi-Fi',
+      Layer1Interface: 'Device.WiFi.Radio.3',
+      Layer3Interface: '',
+      PhysAddress: '4A:0C:92:AD:2E:11',
+      'X_PRPLWARE-COM_Protected': 0,
+    },
+    path: 'Hosts.Host.5.',
+  },
+  {
+    parameters: {
+      IPAddress: '192.168.1.5',
+    },
+    path: 'Hosts.Host.5.IPv4Address.1.',
+  },
+  {
+    parameters: {
+      IPAddress: 'fe80::84c:e4f2:f791:40d0',
+    },
+    path: 'Hosts.Host.5.IPv6Address.1.',
+  },
+  {
+    parameters: {
+      BytesReceived: 0,
+      BytesSent: 0,
+      PacketsReceived: 0,
+      PacketsSent: 0,
+    },
+    path: 'Hosts.Host.5.WANStats.',
+  },
+  {
+    parameters: {
+      Active: 0,
+      ActiveLastChange: '2026-02-23T09:31:51.911514140Z',
+      AssociatedDevice: '',
+      DHCPClient: 'Device.DHCPv4.Server.Pool.1.Client.4',
+      HostName: 'iPhone',
+      IPAddress: '192.168.1.6',
+      IPv4AddressNumberOfEntries: 1,
+      IPv6AddressNumberOfEntries: 1,
+      InterfaceType: 'Wi-Fi',
+      Layer1Interface: 'Device.WiFi.Radio.1',
+      Layer3Interface: 'Device.IP.Interface.3',
+      PhysAddress: 'D6:11:B8:A8:54:5C',
+      'X_PRPLWARE-COM_Protected': 0,
+    },
+    path: 'Hosts.Host.6.',
+  },
+  {
+    parameters: {
+      IPAddress: '192.168.1.6',
+    },
+    path: 'Hosts.Host.6.IPv4Address.1.',
+  },
+  {
+    parameters: {
+      IPAddress: 'fe80::46a:3079:1171:e0de',
+    },
+    path: 'Hosts.Host.6.IPv6Address.1.',
+  },
+  {
+    parameters: {
+      BytesReceived: 0,
+      BytesSent: 0,
+      PacketsReceived: 0,
+      PacketsSent: 0,
+    },
+    path: 'Hosts.Host.6.WANStats.',
+  },
+  {
+    parameters: {
+      Active: 0,
+      ActiveLastChange: '2026-02-23T09:36:43.156753185Z',
+      AssociatedDevice: '',
+      DHCPClient: 'Device.DHCPv4.Server.Pool.1.Client.5',
+      HostName: 'VANWCDFN5NV2',
+      IPAddress: '192.168.1.7',
+      IPv4AddressNumberOfEntries: 1,
+      IPv6AddressNumberOfEntries: 0,
+      InterfaceType: 'Wi-Fi',
+      Layer1Interface: 'Device.WiFi.Radio.3',
+      Layer3Interface: 'Device.IP.Interface.3',
+      PhysAddress: '04:EA:56:39:E5:77',
+      'X_PRPLWARE-COM_Protected': 0,
+    },
+    path: 'Hosts.Host.7.',
+  },
+  {
+    parameters: {
+      IPAddress: '192.168.1.7',
+    },
+    path: 'Hosts.Host.7.IPv4Address.1.',
+  },
+  {
+    parameters: {
+      BytesReceived: 0,
+      BytesSent: 0,
+      PacketsReceived: 0,
+      PacketsSent: 0,
+    },
+    path: 'Hosts.Host.7.WANStats.',
+  },
+  {
+    parameters: {
+      InactiveCheckInterval: 43200,
+      InactiveCheckThreshold: 150,
+      MaxDevices: 252,
+      MaxInactiveTime: 0,
+      MaxInactiveTimeThreshold: 0,
+    },
+    path: 'Hosts.X_PRPLWARE-COM_HostConfig.',
+  },
+];

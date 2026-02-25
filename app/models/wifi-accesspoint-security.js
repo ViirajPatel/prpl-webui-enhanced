@@ -23,4 +23,11 @@ export default class WifiAccesspointSecurityModel extends Model {
   @attr SPPAmsdu;
   @attr TransitionDisable;
   @attr WEPKey;
+
+  @attr({
+    defaultValue() {
+      return 'WiFi.AccessPoint.';
+    },
+  })
+  _namespace;
 }

@@ -10,20 +10,21 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
 
   pathForType(type) {
     let result = '';
-    type.split('-').forEach(chunk => {
+    type.split('-').forEach((chunk) => {
       result = result + capitalize(chunk) + '.';
     });
     return result;
   }
 
-  @computed('session.isAuthenticated')
+  @computed('session.data.authenticated.sessionID', 'session.isAuthenticated')
   get headers() {
     let headers = {
-      'Content-Type': "application/json"
+      'Content-Type': 'application/json',
     };
 
     if (this.session.isAuthenticated) {
-      headers['Authorization'] = 'bearer ' + this.session.data.authenticated.sessionID;
+      headers['Authorization'] =
+        'bearer ' + this.session.data.authenticated.sessionID;
     } else {
       console.log('User not authenticated');
     }
@@ -62,7 +63,6 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
    @param {Object} snapshot
    */
   _getModelNamespace(modelName, snapshot) {
-    
     // get the correct TR-181 namespace to call the REST API
     let store = null;
     let modelNamespace = '';
@@ -76,11 +76,13 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
     if (store) {
       let model = store.modelFor(modelName);
       if (model.attributes.has('_namespace')) {
-        modelNamespace = model.attributes.get('_namespace').options.defaultValue();
+        modelNamespace = model.attributes
+          .get('_namespace')
+          .options.defaultValue();
       }
     }
     if (!modelNamespace) modelNamespace = this.pathForType(modelName);
-    
+
     return modelNamespace;
   }
 
@@ -93,19 +95,19 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
   */
   _buildURL(modelNamespace, id) {
     let { host } = this;
-    
+
     // add the adapter's namespace
     let url = this.urlPrefix();
-    
+
     // add the model's namespace
     if (modelNamespace) url = url + modelNamespace;
-    
+
     // add trailing slash if needed
     if (!host && url && url.charAt(0) !== '/') url = '/' + url;
-    
+
     // add the entry id
     if (id) url = url + id;
-    
+
     return url;
   }
 }

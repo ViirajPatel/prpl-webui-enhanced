@@ -1,0 +1,205 @@
+{{!--
+  Firewall Rule Form Template
+  
+  WHY: Replicates Homeware's firewall rule add/edit form.
+  Contains form fields for all rule parameters matching
+  the fwrule_columns structure from firewall-modal.lp
+--}}
+<div class="card mt-4">
+  <div class="card-header">
+    <h5 class="card-title mb-0">
+      <i class="fas fa-{{if this.isEditing 'edit' 'plus'}} me-2"></i>
+      {{if this.isEditing "Edit Firewall Rule" "Add Firewall Rule"}}
+    </h5>
+  </div>
+  <div class="card-body">
+    {{!-- Error display --}}
+    {{#if this.errorMessage}}
+      <div class="alert alert-danger">
+        {{this.errorMessage}}
+      </div>
+    {{/if}}
+    
+    <form>
+      <div class="row">
+        {{!-- Rule Name/Alias --}}
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Rule Name *</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="e.g., allow-http"
+            value={{this.alias}}
+            {{on "input" this.updateAlias}}
+          >
+          <small class="text-muted">Unique identifier for this rule</small>
+        </div>
+        
+        {{!-- Enable Toggle --}}
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Status</label>
+          <div class="form-check form-switch">
+            <input 
+              type="checkbox" 
+              class="form-check-input" 
+              id="ruleEnabled"
+              checked={{this.enabled}}
+              {{on "change" this.updateEnabled}}
+            >
+            <label class="form-check-label" for="ruleEnabled">
+              {{if this.enabled "Enabled" "Disabled"}}
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        {{!-- Action/Target --}}
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Action</label>
+          <select 
+            class="form-select"
+            {{on "change" this.updateTarget}}
+          >
+            {{#each this.targetOptions as |option|}}
+              <option 
+                value={{option.value}}
+                selected={{is-equal this.target option.value}}
+              >
+                {{option.label}}
+              </option>
+            {{/each}}
+          </select>
+        </div>
+        
+        {{!-- Protocol --}}
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Protocol</label>
+          <select 
+            class="form-select"
+            {{on "change" this.updateProtocol}}
+          >
+            {{#each this.protocolOptions as |option|}}
+              <option 
+                value={{option.value}}
+                selected={{is-equal this.protocol option.value}}
+              >
+                {{option.label}}
+              </option>
+            {{/each}}
+          </select>
+        </div>
+        
+        {{!-- DSCP --}}
+        <div class="col-md-4 mb-3">
+          <label class="form-label">DSCP Marking</label>
+          <select 
+            class="form-select"
+            {{on "change" this.updateDscp}}
+          >
+            {{#each this.dscpOptions as |option|}}
+              <option 
+                value={{option.value}}
+                selected={{is-equal this.dscp option.value}}
+              >
+                {{option.label}}
+              </option>
+            {{/each}}
+          </select>
+          <small class="text-muted">QoS traffic classification</small>
+        </div>
+      </div>
+      
+      {{!-- Source Configuration --}}
+      <h6 class="border-bottom pb-2 mt-3">Source</h6>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">IP Address/Subnet</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="e.g., 192.168.1.0/24 or leave empty for any"
+            value={{this.sourceIP}}
+            {{on "input" this.updateSourceIP}}
+          >
+        </div>
+        
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Port</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="e.g., 80 or 1000-2000 or leave empty for any"
+            value={{this.sourcePort}}
+            {{on "input" this.updateSourcePort}}
+          >
+        </div>
+      </div>
+      
+      {{!-- Destination Configuration --}}
+      <h6 class="border-bottom pb-2 mt-3">Destination</h6>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">IP Address/Subnet</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="e.g., 192.168.1.100 or leave empty for any"
+            value={{this.destIP}}
+            {{on "input" this.updateDestIP}}
+          >
+        </div>
+        
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Port</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="e.g., 443 or 8000-9000 or leave empty for any"
+            value={{this.destPort}}
+            {{on "input" this.updateDestPort}}
+          >
+        </div>
+      </div>
+      
+      {{!-- Description --}}
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea 
+          class="form-control" 
+          rows="2"
+          placeholder="Optional description of what this rule does"
+          {{on "input" this.updateDescription}}
+        >{{this.description}}</textarea>
+      </div>
+      
+      {{!-- Action Buttons --}}
+      <div class="d-flex gap-2">
+        <button 
+          type="button" 
+          class="btn btn-primary"
+          disabled={{this.isSaving}}
+          {{on "click" this.saveRule}}
+        >
+          {{#if this.isSaving}}
+            <span class="spinner-border spinner-border-sm me-1"></span>
+            Saving...
+          {{else}}
+            <i class="fas fa-save me-1"></i>
+            {{if this.isEditing "Update Rule" "Add Rule"}}
+          {{/if}}
+        </button>
+        
+        <button 
+          type="button" 
+          class="btn btn-secondary"
+          disabled={{this.isSaving}}
+          {{on "click" this.cancel}}
+        >
+          <i class="fas fa-times me-1"></i>
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

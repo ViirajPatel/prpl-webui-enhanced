@@ -8,7 +8,7 @@ export default class NetworkInterfaceComponent extends Component {
   @action
   updateInterface() {
     // Save all IPv4 addresses for this interface
-    this.args.interface.IPv4Address.forEach(address => {
+    this.args.interface.IPv4Address.forEach((address) => {
       address.save();
     });
     this.hasChanges = false;

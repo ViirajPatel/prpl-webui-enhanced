@@ -13,6 +13,9 @@ export default class IpModel extends Model {
   @hasMany('ip-interface') Interface;
 
   @attr({
-    defaultValue() { return 'IP.'; }
-  }) _namespace;
+    defaultValue() {
+      return 'IP.';
+    },
+  })
+  _namespace;
 }

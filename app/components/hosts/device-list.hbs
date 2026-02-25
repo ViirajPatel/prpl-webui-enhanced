@@ -1,0 +1,27 @@
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Hostname</th>
+      <th>Active from</th>
+      <th>IP Address</th>
+      <th>MAC Address</th>
+      <th>Interface Type</th>
+     
+    </tr>
+  </thead>
+  <tbody>
+    {{#each @this.hosts as |host|}}
+      <tr>
+        <td><StatusIndicator @status={{host.Active}} @statusKey="1" /></td>
+        <td>{{host.HostName}}</td>
+        <td>{{host.ActiveLastChange}}</td>
+        <td>{{host.IPAddress}}</td>
+        <td>{{host.PhysAddress}}</td>
+        <td>{{host.InterfaceType}}</td>
+        
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

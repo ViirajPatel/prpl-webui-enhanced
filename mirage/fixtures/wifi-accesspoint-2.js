@@ -26,7 +26,7 @@ const data = [
       IsolationEnable: 0,
       SSIDAdvertisementEnabled: 1,
       Alias: 'wlan1',
-      SSIDReference: 'Device.WiFi.SSID.2.',
+      SSIDReference: 'WiFi.SSID.2.',
       MACFilterAddressList: '',
       dbgAPEnable: 0,
     },

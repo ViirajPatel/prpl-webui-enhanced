@@ -1,0 +1,43 @@
+{{page-title "Firewall"}}
+
+{{!--
+Firewall Page Template
+
+WHY: This template replicates the Homeware firewall functionality:
+1. Status card showing current firewall level and rule counts
+2. Settings panel for firewall level and policies
+3. Rules table for viewing/editing firewall rules
+4. Rule form for adding new rules
+
+The layout uses Bootstrap grid to organize components similar to Homeware.
+--}}
+
+<div data-test-firewall-page>
+  <h2>Firewall</h2>
+
+  <div class="row">
+    {{!-- Status Card - Shows current firewall status like Homeware's smallcard --}}
+    <div class="col-md-4">
+      <Firewall::StatusCard @firewall={{this.model.firewall}} @chains={{this.model.chains}} />
+    </div>
+
+    {{!-- Settings Panel - Firewall level and policy configuration --}}
+    <div class="col-md-8">
+      <Firewall::Settings @firewall={{this.model.firewall}} @levels={{this.model.levels}} />
+    </div>
+  </div>
+  {{log this.model.chains}}
+  <div class="row mt-4">
+    {{!-- Rules Table - Display and manage firewall rules --}}
+    <div class="col-12">
+      <Firewall::RulesTable @chains={{this.model.chains}} @selectedChain={{this.selectedChain}}
+        @onSelectChain={{this.selectChain}} />
+    </div>
+  </div>
+
+  {{!-- Rule Form Modal - For adding/editing rules --}}
+  {{#if this.showRuleForm}}
+    <Firewall::RuleForm @rule={{this.editingRule}} @chain={{this.selectedChain}} @onSave={{this.saveRule}}
+      @onCancel={{this.cancelEdit}} />
+  {{/if}}
+</div>

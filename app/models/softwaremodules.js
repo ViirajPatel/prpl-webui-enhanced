@@ -8,6 +8,9 @@ export default class SoftwareModulesModel extends Model {
   @hasMany('softwaremodules-deploymentunit') DeploymentUnit;
 
   @attr({
-    defaultValue() { return 'SoftwareModules.'; }
-  }) _namespace;
+    defaultValue() {
+      return 'SoftwareModules.';
+    },
+  })
+  _namespace;
 }

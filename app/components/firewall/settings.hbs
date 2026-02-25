@@ -1,0 +1,121 @@
+{{!--
+  Firewall Settings Template
+  
+  WHY: Replicates Homeware's firewall modal settings section.
+  This provides controls for:
+  - Enable/disable firewall
+  - Select firewall level (Low/Medium/High/User)
+  - Configure default policies
+  
+  Layout matches Homeware's form style.
+--}}
+<div class="card" data-test-settings-card>
+  <div class="card-header">
+    <h5 class="card-title mb-0">
+      <i class="fas fa-cog me-2"></i>
+      Firewall Settings
+    </h5>
+  </div>
+  <div class="card-body">
+    {{!-- Error message display --}}
+    {{#if this.errorMessage}}
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        {{this.errorMessage}}
+        <button type="button" class="btn-close" {{on "click" this.dismissError}}></button>
+      </div>
+    {{/if}}
+    
+    <form>
+      {{!-- Firewall Enable Toggle --}}
+      <div class="mb-3">
+        <div class="form-check form-switch">
+          <input 
+            type="checkbox" 
+            class="form-check-input" 
+            id="firewallEnable"
+            data-test-enable-toggle
+            checked={{@firewall.Enable}}
+            {{on "change" this.onEnableChange}}
+          >
+          <label class="form-check-label" for="firewallEnable">
+            <strong>Enable Firewall</strong>
+          </label>
+        </div>
+        <small class="text-muted">
+          Master switch to enable or disable the firewall
+        </small>
+      </div>
+
+      {{!-- Firewall Level Selection --}}
+      {{!-- WHY: Homeware uses radio buttons for level selection --}}
+      <div class="mb-3" data-test-level-selector>
+        <label class="form-label"><strong>Firewall Level</strong></label>
+        <div class="row">
+          {{#each this.levels as |level|}}
+            <div class="col-md-6 mb-2">
+              <div class="form-check">
+                <input 
+                  type="radio" 
+                  class="form-check-input" 
+                  name="firewall-level"
+                  id="level-{{level.value}}"
+                  value={{level.value}}
+                  {{on "change" this.onLevelChange}}
+                >
+                <label class="form-check-label" for="level-{{level.value}}">
+                  <strong>{{level.label}}</strong>
+                  <br>
+                  <small class="text-muted">{{level.description}}</small>
+                </label>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+
+      {{!-- Firewall Type Display (Read-only) --}}
+      <div class="mb-3" data-test-firewall-type>
+        <label class="form-label"><strong>Firewall Type</strong></label>
+        <p class="form-control-plaintext">{{@firewall.Type}}</p>
+      </div>
+
+      {{!-- Last Change --}}
+      <div class="mb-3" data-test-last-modified>
+        <label class="form-label text-muted">Last Modified</label>
+        <p class="form-control-plaintext text-muted small">
+          {{@firewall.LastChange}}
+        </p>
+      </div>
+
+      {{!-- Action Buttons --}}
+      <div class="d-flex gap-2">
+        <button 
+          type="button" 
+          class="btn btn-primary"
+          data-test-save-changes
+          disabled={{this.isButtonDisabled}}
+          {{on "click" this.saveSettings}}
+        >
+          {{#if this.isSaving}}
+            <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+            Saving...
+          {{else}}
+            <i class="fas fa-save me-1"></i>
+            Save Changes
+          {{/if}}
+        </button>
+        
+        <button 
+          type="button" 
+          class="btn btn-secondary"
+          data-test-reset-changes
+          disabled={{this.isButtonDisabled}}
+          {{on "click" this.resetSettings}}
+        >
+          <i class="fas fa-undo me-1"></i>
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

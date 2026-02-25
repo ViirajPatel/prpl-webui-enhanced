@@ -1,0 +1,131 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <StatusIndicator @status={{@card.accesspoint.Status}} @statusKey="Enabled"/> 
+    {{#if this.ssidName}}
+      {{this.ssidName}}
+    {{else}}
+      Unknown SSID
+    {{/if}}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+
+        <!-- State / Enable Toggle -->
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label class="form-label fw-bold">State</label>
+          </div>
+          <div class="col-md-8">
+            <div class="form-check form-switch">
+              <Input @type="checkbox" @checked={{this.enabled}} class="form-check-input" id="enable-{{@card.accesspoint.id}}" />
+              <label class="form-check-label" for="enable-{{@card.accesspoint.id}}">
+                {{if this.enabled "ON" "OFF"}}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- SSID Name -->
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label class="form-label fw-bold">SSID</label>
+          </div>
+          <div class="col-md-8">
+            <Input class="form-control" type="text" @value={{this.ssidName}} placeholder="Network name" />
+          </div>
+        </div>
+
+        <!-- Broadcast SSID -->
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label class="form-label fw-bold">Broadcast SSID</label>
+          </div>
+          <div class="col-md-8">
+            <div class="form-check form-switch">
+              <Input @type="checkbox" @checked={{this.broadcastSSID}} class="form-check-input" id="broadcast-{{@card.accesspoint.id}}" />
+              <label class="form-check-label" for="broadcast-{{@card.accesspoint.id}}">
+                {{if this.broadcastSSID "ON" "OFF"}}
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-6">
+
+        <!-- Security Mode / Encryption -->
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label class="form-label fw-bold">Security Mode</label>
+          </div>
+          <div class="col-md-8">
+            {{#if @card.security}}
+              <Helper::Select class="form-select" @options={{this.encryptionModes}} @value={{@card.security.ModeEnabled}} @optValue="key" @optLabel="label" @onChange={{this.setEncryptionMode}} />
+            {{else}}
+              <input class="form-control" type="text" disabled value="No Security" readonly />
+            {{/if}}
+          </div>
+        </div>
+
+        <!-- Wireless Password / Passphrase -->
+        {{#if @card.security}}
+          {{#if (or this.isWpa this.isSae this.isWep)}}
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <label class="form-label fw-bold">
+                  {{#if this.isSae}}
+                    SAE Passphrase
+                  {{else if this.isWpa}}
+                    Passphrase
+                  {{else}}
+                    WEP Key
+                  {{/if}}
+                </label>
+                <small class="d-block text-muted mt-1">
+                  {{#if this.isSae}}
+                    8-63 characters
+                  {{else if this.isWpa}}
+                    8-63 characters or 64 hex
+                  {{else}}
+                    5 or 13 bytes hex
+                  {{/if}}
+                </small>
+              </div>
+              <div class="col-md-8">
+                <div class="input-group">
+                  <Input 
+                    class="form-control {{if this.passphraseError 'is-invalid'}}" 
+                    @type={{this.passwordType}} 
+                    @value={{this.currentPassphrase}}
+                    placeholder={{this.passphraseConstraintHint}}
+                  />
+                  <button class="btn btn-outline-secondary" type="button" {{on "click" this.toggleShowPassword}}>
+                    {{if this.showPassword "Hide" "Show"}}
+                  </button>
+                </div>
+                {{#if this.passphraseError}}
+                  <small class="d-block text-danger mt-2">
+                    <strong>Error:</strong> {{this.passphraseError}}
+                  </small>
+                {{/if}}
+              </div>
+            </div>
+          {{/if}}
+        {{/if}}
+
+        <!-- MAC Address Info -->
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label class="form-label fw-bold">MAC Address</label>
+          </div>
+          <div class="col-md-8">
+            <input class="form-control" type="text" disabled value={{this.macAddress}} />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

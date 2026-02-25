@@ -21,7 +21,6 @@ export default Service.extend(Evented, {
   },
 
   addData(identifier, data) {
-
     if (this.hasDataSource(identifier)) {
       let items = this.data[identifier].data.length;
 
@@ -34,9 +33,8 @@ export default Service.extend(Evented, {
       }
 
       // add timestamp in case entry is an object
-      if (typeof data === 'object')
-        data['timestamp'] = Date.now();
-      
+      if (typeof data === 'object') data['timestamp'] = Date.now();
+
       this.data[identifier].data.push(data);
 
       // set trigger that data got added
