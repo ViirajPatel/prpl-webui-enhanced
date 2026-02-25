@@ -13,8 +13,8 @@
 </ul>
 
 {{#if this.radiosTabActive}}
-  {{#each @model.Radio as |radio|}}
-    <Wifi::Radio @radio={{radio}} />
+  {{#each this.radiosWithSSIDs as |entry|}}
+    <Wifi::Radio @radio={{entry.radio}} @associatedSSIDs={{entry.associatedSSIDs}} />
   {{/each}}
 {{/if}}
 

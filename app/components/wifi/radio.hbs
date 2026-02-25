@@ -60,5 +60,28 @@
 
       </div>
     </div>
+
+    {{!-- Associated SSIDs section --}}
+    {{#if @associatedSSIDs.length}}
+      <hr />
+      <div class="row">
+        <div class="col-12">
+          <label class="form-label fw-bold">Associated SSIDs</label>
+          <div class="d-flex flex-wrap gap-2">
+            {{#each @associatedSSIDs as |ssidInfo|}}
+              <span class="badge {{if ssidInfo.enabled 'bg-success' 'bg-secondary'}}">
+                {{ssidInfo.ssidName}}
+                {{#if ssidInfo.enabled}}
+                  <small>(ON)</small>
+                {{else}}
+                  <small>(OFF)</small>
+                {{/if}}
+              </span>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+
   </div>
 </div>

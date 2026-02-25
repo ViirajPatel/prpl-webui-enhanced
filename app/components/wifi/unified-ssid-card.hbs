@@ -6,6 +6,9 @@
     {{else}}
       Unknown SSID
     {{/if}}
+    {{#if this.radioFrequency}}
+      <span class="badge bg-secondary ms-2">{{this.radioFrequency}}{{#if this.radioName}} - {{this.radioName}}{{/if}}</span>
+    {{/if}}
   </div>
   <div class="card-body">
     <div class="row">

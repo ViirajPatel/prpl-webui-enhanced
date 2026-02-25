@@ -50,6 +50,14 @@ export default class WifiUnifiedSsidCardComponent extends Component {
     return this.args.card.ssid?.get('MACAddress') || '';
   }
 
+  get radioFrequency() {
+    return this.args.card.radio?.get('OperatingFrequencyBand') || '';
+  }
+
+  get radioName() {
+    return this.args.card.radio?.get('Name') || '';
+  }
+
   get broadcastSSID() {
     return this.args.card.accesspoint.SSIDAdvertisementEnabled == 1
       ? true
