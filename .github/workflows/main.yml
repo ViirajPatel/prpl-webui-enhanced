@@ -5,12 +5,21 @@ on:
     tags:
       - 'v*' # Triggers on tags like v1.0.0
 
+permissions:
+  contents: write
+
 jobs:
   build-and-archive:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16.20.2
+          cache: npm
 
       - name: Install Dependencies & Build Ember App
         run: |
