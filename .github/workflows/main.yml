@@ -10,23 +10,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: [actions/checkout@v4](https://github.com)
+        uses: actions/checkout@v4
 
       - name: Install Dependencies & Build Ember App
         run: |
           npm install
-          npm run build -- -prod
+          npm run build -- --environment=production
 
       - name: Create tar.gz of dist
         run: |
           # Get repo name and create archive
           REPO_NAME=$(basename ${{ github.repository }})
-          tar -czvf "$REPO_NAME.tar.gz" dist/
+          VERSION=${{ github.ref_name }}
+          tar -czvf "$REPO_NAME-$VERSION.tar.gz" dist/
           # Export filename for the next step
-          echo "ASSET_NAME=$REPO_NAME.tar.gz" >> $GITHUB_ENV
+          echo "ASSET_NAME=$REPO_NAME-$VERSION.tar.gz" >> $GITHUB_ENV
 
       - name: Upload to GitHub Release
-        uses: [softprops/action-gh-release@v2](https://github.com)
+        uses: softprops/action-gh-release@v2
         with:
           files: ${{ env.ASSET_NAME }}
         env:
